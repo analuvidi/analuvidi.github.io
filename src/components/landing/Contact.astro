@@ -1,0 +1,82 @@
+---
+import EditableLink from "@/components/global/EditableLink.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { contactInfo } from "@/data/portfolio";
+import { getContent } from "@/lib/getContent";
+
+const textDefault =
+  "Tenho interesse em novos projetos e oportunidades. Fico à disposição para uma conversa ou para mostrar mais do meu trabalho.";
+const linkClass =
+  "text-base-900 dark:text-white tracking-tight underline underline-offset-4 transition-colors hover:text-accent-700 dark:hover:text-accent-400";
+---
+
+<section class="scroll-mt-32" id="contato">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start">
+      <div class="lg:col-start-2">
+        <Text
+          tag="p"
+          variant="textSM"
+          class="text-base-600 dark:text-base-300"
+          data-editable="sections.contact.eyebrow"
+        >
+          {getContent("sections.contact.eyebrow", "Contato")}
+        </Text>
+      </div>
+      <div class="lg:col-span-2">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="font-semibold leading-snug text-left tracking-tighter text-base-900 dark:text-white"
+          data-editable="sections.contact.title"
+        >
+          {getContent("sections.contact.title", "Vamos conversar?")}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 dark:text-base-300"
+          data-editable="sections.contact.text"
+        >
+          {getContent("sections.contact.text", textDefault)}
+        </Text>
+
+        <dl class="mt-12 flex flex-col border-t border-base-200 dark:border-base-800">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
+            <dt class="text-xs uppercase text-base-600 dark:text-base-300">E-mail</dt>
+            <dd class="text-base">
+              <EditableLink
+                linkKey="contact.email"
+                href={`mailto:${contactInfo.email}`}
+                data-cursor-magnetic
+                class={linkClass}
+              >
+                {getContent("contact.email", contactInfo.email)}
+              </EditableLink>
+            </dd>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
+            <dt class="text-xs uppercase text-base-600 dark:text-base-300">Telefone</dt>
+            <dd class="text-base">
+              <EditableLink
+                linkKey="contact.phone"
+                href={contactInfo.phoneHref}
+                data-cursor-magnetic
+                class={linkClass}
+              >
+                {getContent("contact.phone", contactInfo.phone)}
+              </EditableLink>
+            </dd>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
+            <dt class="text-xs uppercase text-base-600 dark:text-base-300">Localização</dt>
+            <dd class="text-base text-base-900 tracking-tight dark:text-white" data-editable="contact.location">
+              {getContent("contact.location", contactInfo.location)}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </Wrapper>
+</section>

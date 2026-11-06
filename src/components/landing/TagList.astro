@@ -1,0 +1,17 @@
+---
+interface Props {
+  tags: string[];
+  class?: string;
+}
+
+const { tags, class: className = "" } = Astro.props;
+---
+
+<ul
+  class:list={[
+    "flex flex-wrap gap-x-3 gap-y-1 text-xs uppercase text-base-600 dark:text-base-300 lg:justify-end lg:pl-8 lg:text-right",
+    className,
+  ]}
+>
+  {tags.map((tag) => <li>{tag}</li>)}
+</ul>

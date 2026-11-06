@@ -1,0 +1,10 @@
+---
+// O ícone vai embutido no HTML para não depender de arquivo guardado no cache do navegador.
+import faviconData from "@/images/favicon.png?inline";
+
+const faviconVersion = "4";
+---
+
+<link rel="icon" href={faviconData} type="image/png" />
+<link rel="apple-touch-icon" href={`/apple-touch-icon.png?v=${faviconVersion}`} />
+<link rel="manifest" href={`/manifest.webmanifest?v=${faviconVersion}`} />

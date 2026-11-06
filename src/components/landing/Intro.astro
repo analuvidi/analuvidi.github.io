@@ -1,0 +1,52 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { getContent } from "@/lib/getContent";
+
+const introDefault =
+  "Olá, sou Ana Luiza. Entre criatividade, comunicação e tecnologia, gosto de transformar ideias em experiências e soluções.";
+const introSupportDefault =
+  "Tenho interesse em explorar novas possibilidades, desenvolver projetos e conectar pessoas e marcas por meio da comunicação.";
+---
+
+<section>
+  <Wrapper variant="standard" class="pb-8 pt-40 lg:pt-80">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+      <div class="lg:col-span-2 lg:col-start-3">
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="font-semibold leading-snug text-left tracking-tighter text-base-900 dark:text-white"
+          data-editable="intro.text"
+        >
+          {getContent("intro.text", introDefault)}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-6 max-w-xl text-base-600 dark:text-base-300"
+          data-editable="intro.support"
+        >
+          {getContent("intro.support", introSupportDefault)}
+        </Text>
+        <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+          <a
+            href="#projects"
+            data-cursor-magnetic
+            class="text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400"
+          >
+            Ver projetos
+          </a>
+          <a
+            href="#contato"
+            data-cursor-magnetic
+            class="text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400"
+          >
+            Entrar em contato
+          </a>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

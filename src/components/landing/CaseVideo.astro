@@ -1,0 +1,62 @@
+---
+interface Props {
+  src: string;
+  poster: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const { src, poster, alt, width, height } = Astro.props;
+---
+
+<figure data-case-video>
+  <video
+    src={src}
+    poster={poster}
+    width={width}
+    height={height}
+    aria-label={alt}
+    class="h-auto w-full"
+    muted
+    loop
+    playsinline
+    preload="none"></video>
+  <button
+    type="button"
+    data-cursor-magnetic
+    class="py-3 text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400"
+  >
+    Reproduzir
+  </button>
+</figure>
+
+<script>
+  // Toca só enquanto está na tela. Quem pausa ou prefere menos movimento mantém o controle.
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll<HTMLElement>("[data-case-video]").forEach((figure) => {
+    const video = figure.querySelector("video");
+    const button = figure.querySelector("button");
+    if (!video || !button) return;
+
+    let pausedByUser = false;
+
+    video.addEventListener("play", () => (button.textContent = "Pausar"));
+    video.addEventListener("pause", () => (button.textContent = "Reproduzir"));
+
+    button.addEventListener("click", () => {
+      pausedByUser = !video.paused;
+      if (video.paused) video.play();
+      else video.pause();
+    });
+
+    new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) video.pause();
+        else if (!pausedByUser && !reducedMotion.matches) video.play().catch(() => {});
+      },
+      { threshold: 0.5 },
+    ).observe(video);
+  });
+</script>

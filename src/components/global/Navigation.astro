@@ -1,0 +1,63 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import EditableLink from "@/components/global/EditableLink.astro";
+import { getContent } from "@/lib/getContent";
+
+const links = [
+  { href: "/#sobre", text: "Sobre" },
+  { href: "/#skills", text: "Competências" },
+  { href: "/#work", text: "Experiência" },
+  { href: "/#projects", text: "Projetos" },
+  { href: "/#education", text: "Formação" },
+];
+---
+
+<nav class="bg-white dark:bg-base-950 fixed top-0 z-10 w-full">
+  <Wrapper variant="standard" class="py-2">
+    <div class="grid grid-cols-3 lg:grid-cols-4 items-start">
+      <a href="/" class="group flex">
+        <Logo
+          class="text-base-600 dark:text-base-300 text-xs tracking-tight font-base-900 transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
+        />
+      </a>
+      <div class="hidden lg:col-start-3 lg:flex gap-x-6 whitespace-nowrap text-sm items-center">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              data-cursor-magnetic
+              class="text-base-600 dark:text-base-300 tracking-tight text-xs transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+            >
+              {link.text}
+            </a>
+          ))
+        }
+      </div>
+      <div class="col-start-3 flex justify-end lg:col-start-4">
+        <EditableLink
+          linkKey="nav.contact"
+          href="/#contato"
+          data-cursor-magnetic
+          class="text-base-600 dark:text-base-300 text-xs tracking-tight font-base transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+        >
+          {getContent("nav.contact", "Contato")}
+        </EditableLink>
+      </div>
+    </div>
+    <div class="mt-2 flex justify-between gap-3 overflow-x-auto scrollbar-hide sm:justify-start sm:gap-5 lg:hidden">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="shrink-0 text-base-600 dark:text-base-300 tracking-tight text-xs transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+          >
+            {link.text}
+          </a>
+        ))
+      }
+    </div>
+  </Wrapper>
+</nav>

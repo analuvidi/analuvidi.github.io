@@ -1,0 +1,68 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import TagList from "@/components/landing/TagList.astro";
+import { skillItems } from "@/data/portfolio";
+import { getContent } from "@/lib/getContent";
+---
+
+<section class="scroll-mt-32" id="skills">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 items-start">
+      <div class="lg:col-start-2">
+        <Text
+          tag="p"
+          variant="textSM"
+          class="text-base-600 dark:text-base-300"
+          data-editable="sections.skills.eyebrow"
+        >
+          {getContent("sections.skills.eyebrow", "O que uso no dia a dia")}
+        </Text>
+      </div>
+      <Text
+        tag="h2"
+        variant="textXL"
+        class="font-semibold leading-snug text-left tracking-tighter lg:col-span-2 text-base-900 dark:text-white"
+        data-editable="sections.skills.title"
+      >
+        {getContent("sections.skills.title", "Competências")}
+      </Text>
+    </div>
+
+    <div class="flex flex-col mt-8">
+      {
+        skillItems.map((skill, index) => (
+          <article class="py-12 border-t border-base-200 dark:border-base-800">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-start">
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600 dark:text-base-300 uppercase lg:pr-8"
+                data-editable={`skills.${index}.category`}
+              >
+                {getContent(`skills.${index}.category`, skill.category)}
+              </Text>
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="text-base-900 dark:text-white leading-tight font-semibold"
+                data-editable={`skills.${index}.title`}
+              >
+                {getContent(`skills.${index}.title`, skill.title)}
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="text-base-600 dark:text-base-300"
+                data-editable={`skills.${index}.description`}
+              >
+                {getContent(`skills.${index}.description`, skill.description)}
+              </Text>
+              <TagList tags={skill.tags} />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>
