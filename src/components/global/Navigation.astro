@@ -21,13 +21,13 @@ const currentClass =
 
 <nav class="bg-white dark:bg-base-950 fixed top-0 z-10 w-full">
   <Wrapper variant="standard" class="py-2 pointer-coarse:py-0">
-    <div class="grid grid-cols-3 lg:grid-cols-4 items-start">
+    <div class="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-4 items-start">
       <a href="/" class="tap-target group flex">
         <Logo
           class="text-base-600 dark:text-base-300 text-sm tracking-tight font-base-900 transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
         />
       </a>
-      <div class="hidden lg:col-start-3 lg:flex gap-x-6 whitespace-nowrap text-base items-center">
+      <div class="hidden lg:col-start-3 lg:flex gap-x-4 xl:gap-x-6 whitespace-nowrap text-base items-center">
         {
           links.map((link) => (
             <a
