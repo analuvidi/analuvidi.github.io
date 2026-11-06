@@ -6,6 +6,7 @@ import { projectItems } from "@/data/portfolio";
 import { getContent } from "@/lib/getContent";
 
 const projectsEyebrowDefault = "Trabalhos autorais";
+const [featuredProject, ...otherProjects] = projectItems;
 ---
 
 <section class="scroll-mt-32" id="projects">
@@ -31,15 +32,14 @@ const projectsEyebrowDefault = "Trabalhos autorais";
     </div>
 
     <div class="flex flex-col mt-8">
-      {
-        projectItems.map((item) => (
-          <CaseCard
-            item={item}
-            contentPrefix="projects"
-            basePath="projeto"
-          />
-        ))
-      }
+      <CaseCard item={featuredProject} contentPrefix="projects" basePath="projeto" />
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-4">
+        {
+          otherProjects.map((item) => (
+            <CaseCard item={item} contentPrefix="projects" basePath="projeto" compact />
+          ))
+        }
+      </div>
     </div>
   </Wrapper>
 </section>

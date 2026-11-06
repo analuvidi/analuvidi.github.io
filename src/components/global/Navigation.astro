@@ -83,6 +83,8 @@ const currentClass =
   function setCurrent(id: string | null) {
     currentId = id;
 
+    if (!id && window.scrollY < 300) scroller?.scrollTo({ left: 0 });
+
     links.forEach((link) => {
       if (link.hash !== `#${id}`) {
         link.removeAttribute("aria-current");

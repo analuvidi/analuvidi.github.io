@@ -2,14 +2,17 @@
 interface Props {
   tags: string[];
   class?: string;
+  /** Em colunas estreitas, as tags acompanham o texto à esquerda. */
+  align?: "start" | "end";
 }
 
-const { tags, class: className = "" } = Astro.props;
+const { tags, class: className = "", align = "end" } = Astro.props;
 ---
 
 <ul
   class:list={[
-    "flex flex-wrap gap-x-3 gap-y-1 text-sm text-base-500 dark:text-base-400 lg:justify-end lg:pl-8 lg:text-right",
+    "flex flex-wrap gap-x-3 gap-y-1 text-sm text-base-500 dark:text-base-400",
+    align === "end" && "lg:justify-end lg:pl-8 lg:text-right",
     className,
   ]}
 >
