@@ -112,7 +112,7 @@ export const skillItems: SkillItem[] = [
     category: "Criação e design",
     title: "Figma",
     description:
-      "Onde transformo ideias em wireframes, protótipos e interfaces. Foi a ferramenta central da monitoria de Design de Interação, onde ministrei um minicurso introdutório, e do app de leitura que está em Projetos.",
+      "Onde transformo ideias em wireframes, protótipos e interfaces. Usei na monitoria e no app de leitura.",
     tags: [
       "Wireframes",
       "Prototipação",
@@ -125,7 +125,7 @@ export const skillItems: SkillItem[] = [
     category: "Criação e design",
     title: "Canva e CapCut",
     description:
-      "Minha ferramenta para criar materiais gráficos, apresentações e peças de comunicação digital: compor, testar layouts e organizar a informação até a mensagem ficar clara. No CapCut, dou os primeiros passos em edição de vídeo.",
+      "Crio materiais gráficos e apresentações até a mensagem ficar clara. No CapCut, dou os primeiros passos em vídeo.",
     tags: [
       "Materiais gráficos",
       "Composição visual",
@@ -139,7 +139,7 @@ export const skillItems: SkillItem[] = [
     category: "Inteligência artificial e automação",
     title: "Claude",
     description:
-      "Uso o Claude, da Anthropic, para organizar ideias, estruturar instruções e prompts e otimizar fluxos de trabalho. Também exploro a criação de agentes de IA e a automação de tarefas, como apoio ao trabalho criativo.",
+      "Uso para organizar ideias, estruturar prompts e otimizar fluxos de trabalho. Também exploro agentes de IA e automação.",
     tags: [
       "Agentes de IA",
       "Automação",
@@ -152,7 +152,7 @@ export const skillItems: SkillItem[] = [
     category: "Comunicação e relacionamento",
     title: "Ouvir antes de propor",
     description:
-      "Os anos de atendimento ao público e a experiência comercial na Proton me ensinaram a entender o que a pessoa do outro lado precisa antes de sugerir qualquer solução.",
+      "O atendimento e a experiência na Proton me ensinaram a entender a necessidade antes de sugerir uma solução.",
     tags: [
       "Escuta ativa",
       "Atendimento ao cliente",
@@ -166,7 +166,7 @@ export const skillItems: SkillItem[] = [
     category: "Tecnologia e ferramentas digitais",
     title: "Base técnica",
     description:
-      "A formação em sistemas e o estágio em desenvolvimento mobile me dão familiaridade com produtos digitais e ajudam a entender como uma ideia vira site, app ou landing page.",
+      "A formação e o estágio me ajudam a entender como uma ideia vira site ou app.",
     tags: [
       "React",
       "TypeScript",
@@ -187,7 +187,7 @@ export const workItems: PortfolioCase[] = [
     title: "Estagiária em Desenvolvimento Mobile",
     organization: "Dinni Soluções em Sistemas",
     description:
-      "Desenvolvi e mantive interfaces de aplicações mobile, implementei funcionalidades, corrigi bugs e validei entregas, em equipe, com Git e metodologias ágeis.",
+      "Desenvolvi interfaces mobile, implementei funcionalidades e corrigi bugs, em equipe, com Git e metodologias ágeis.",
     category: "Estágio",
     skills: ["TypeScript", "React", "Consulta em banco de dados", "Metodologias ágeis", "Git e GitHub"],
   },
@@ -197,7 +197,7 @@ export const workItems: PortfolioCase[] = [
     title: "Monitora de Design de Interação",
     organization: "UniViçosa",
     description:
-      "Apoiei estudantes em projetos de UX/UI, planejei e ministrei um minicurso introdutório de Figma, criei materiais didáticos e exercícios práticos e orientei a criação de wireframes e protótipos interativos.",
+      "Apoiei estudantes em projetos de UX/UI, ministrei um minicurso de Figma e criei materiais didáticos.",
     category: "Monitoria",
     skills: ["Figma", "UX/UI", "Wireframes", "Protótipos", "Didática"],
     blockImages: {
@@ -242,7 +242,7 @@ export const workItems: PortfolioCase[] = [
     title: "Gerente de Vendas",
     organization: "Proton – Empresa Júnior",
     description:
-      "Fiz a prospecção e a qualificação de clientes, conduzi reuniões de alinhamento, levantei necessidades e participei da prototipação dos projetos. Foi meu contato direto com a relação entre empresa e cliente.",
+      "Fiz prospecção de clientes, conduzi reuniões, levantei necessidades e participei da prototipação dos projetos.",
     category: "Empresa júnior",
     skills: ["Prospecção", "Reuniões com clientes", "Levantamento de necessidades", "Prototipação"],
   },
@@ -254,19 +254,19 @@ export const compactWorkItems: CompactExperience[] = [
     title: "Recepcionista",
     organization: "Thiferer Hostel",
     description:
-      "Atendimento aos hóspedes, check-ins e suporte durante a estadia, além de apoio à gestão e à organização interna.",
+      "Atendimento aos hóspedes, check-ins e apoio à gestão.",
   },
   {
     year: "2025",
     title: "Bartender (freelancer)",
     organization: "Kadu Barman",
-    description: "Preparo e serviço de drinks em eventos sociais e corporativos.",
+    description: "Preparo e serviço de drinks em eventos.",
   },
   {
     year: "2024 — 2025",
     title: "Aparadora de Buffet (freelancer)",
     organization: "Buffet Pathernon",
-    description: "Organização de alimentos em eventos e suporte à equipe durante o serviço.",
+    description: "Organização de alimentos e suporte à equipe em eventos.",
   },
   {
     year: "2024",
