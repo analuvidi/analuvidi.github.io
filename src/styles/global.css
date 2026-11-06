@@ -31,6 +31,15 @@
   --color-base-950: oklch(0.145 0 0);
 }
 
+/* Área de toque de 44px, só onde há toque: no mouse, o layout fica mais compacto. */
+@utility tap-target {
+  @media (pointer: coarse) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+}
+
 @media (pointer: fine) {
   body.custom-cursor-active,
   body.custom-cursor-active a,
@@ -90,5 +99,22 @@ body.edit-mode-active .editable-image-badge {
 }
 
 .scroll-word {
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
+}
+
+/* O loader só existe com a classe, ligada por JS. Sem JS, o conteúdo aparece direto. */
+#page-loader {
+  display: none;
+}
+
+html.has-loader #page-loader {
+  display: flex;
+}
+
+html.has-loader #page-content {
+  opacity: 0;
+}
+
+html.has-loader body {
+  overflow: hidden;
 }

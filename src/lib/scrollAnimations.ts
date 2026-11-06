@@ -6,13 +6,16 @@ gsap.registerPlugin(ScrollTrigger);
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const TEXT_SELECTORS = [
-  "main h1",
-  "main section[id] h2",
-  "main section[id] .grid.items-start > p",
-  "main section article h3",
-  "main section article p.text-sm",
-];
+const HEADING_SELECTORS = ["main h1", "main section[id] h2", "main section article h3"];
+const BODY_SELECTORS = ["main section[id] .grid.items-start > p", "main section article p"];
+
+/** Altura da tela em que o conteúdo aparece: assim que entra, longe do meio. */
+const REVEAL_LINE = 0.92;
+
+type AnimationOptions = {
+  /** Anima também o que já está na tela. Só faz sentido atrás do loader. */
+  revealVisible?: boolean;
+};
 
 let scrollCtx: gsap.Context | null = null;
 
@@ -65,63 +68,41 @@ function splitTextIntoWords(element: HTMLElement): HTMLElement[] {
   return wordElements;
 }
 
-function getScrollTriggerBounds(element: HTMLElement) {
-  const tag = element.tagName.toLowerCase();
-  const trigger =
-    element.closest("article") ||
-    element.closest("section") ||
-    element.parentElement ||
-    element;
-
-  if (tag === "h1") {
-    return { trigger, start: "top bottom", end: "top 62%", scrub: 0.9 };
-  }
-
-  if (tag === "h2" || tag === "h3") {
-    return { trigger, start: "top bottom", end: "top 58%", scrub: 0.85 };
-  }
-
-  return { trigger, start: "top bottom", end: "top 55%", scrub: 0.95 };
+function isPastRevealLine(element: Element) {
+  return element.getBoundingClientRect().top < window.innerHeight * REVEAL_LINE;
 }
 
-function initStickyTextScroll() {
-  const elements = gsap.utils.toArray<HTMLElement>(TEXT_SELECTORS.join(","));
-
-  elements.forEach((element) => {
-    const words = splitTextIntoWords(element);
-    if (!words.length) return;
-
-    const tag = element.tagName.toLowerCase();
-    const isHeading = tag === "h1" || tag === "h2" || tag === "h3";
-    const { trigger, start, end, scrub } = getScrollTriggerBounds(element);
-
-    gsap.fromTo(
-      words,
-      {
-        yPercent: isHeading ? 115 : 0,
-        y: isHeading ? 0 : 28,
-        opacity: 0,
-        filter: isHeading ? "blur(0px)" : "blur(10px)",
-      },
-      {
-        yPercent: 0,
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        ease: "none",
-        stagger: isHeading ? 0.06 : 0.04,
-        scrollTrigger: {
-          trigger,
-          start,
-          end,
-          scrub,
-        },
-      },
-    );
+/** Roda uma vez ao entrar na tela e termina sozinha, sem depender da rolagem. */
+function reveal(
+  trigger: Element,
+  targets: gsap.TweenTarget,
+  from: gsap.TweenVars,
+  to: gsap.TweenVars,
+) {
+  gsap.fromTo(targets, from, {
+    ...to,
+    duration: 0.6,
+    ease: "power2.out",
+    scrollTrigger: { trigger, start: `top ${REVEAL_LINE * 100}%`, once: true },
   });
 }
 
-export function initScrollAnimations() {
+function initTextReveal(revealVisible: boolean) {
+  const shouldReveal = (element: Element) => revealVisible || !isPastRevealLine(element);
+
+  gsap.utils.toArray<HTMLElement>(HEADING_SELECTORS.join(",")).filter(shouldReveal).forEach((element) => {
+    const words = splitTextIntoWords(element);
+    if (!words.length) return;
+
+    reveal(element, words, { yPercent: 115 }, { yPercent: 0, stagger: { amount: 0.25 } });
+  });
+
+  gsap.utils.toArray<HTMLElement>(BODY_SELECTORS.join(",")).filter(shouldReveal).forEach((element) => {
+    reveal(element, element, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1 });
+  });
+}
+
+export function initScrollAnimations({ revealVisible = false }: AnimationOptions = {}) {
   if (prefersReducedMotion()) return;
 
   scrollCtx?.revert();
@@ -132,48 +113,15 @@ export function initScrollAnimations() {
       gsap.set(element, { clearProps: "opacity,transform,filter" });
     });
 
-    initStickyTextScroll();
+    initTextReveal(revealVisible);
 
     gsap.utils.toArray<HTMLElement>("main section article").forEach((article) => {
-      const media = article.querySelector<HTMLElement>("[data-portfolio-media]");
+      const media =
+        article.querySelector<HTMLElement>("[data-portfolio-media]") ??
+        article.querySelector<HTMLElement>(":scope img");
 
-      if (media) {
-        gsap.fromTo(
-          media,
-          { y: 80, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: media,
-              start: "top bottom",
-              end: "top 55%",
-              scrub: 0.8,
-            },
-          },
-        );
-        return;
-      }
-
-      const image = article.querySelector(":scope img");
-
-      if (image) {
-        gsap.fromTo(
-          image,
-          { y: 80, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: image,
-              start: "top bottom",
-              end: "top 55%",
-              scrub: 0.8,
-            },
-          },
-        );
+      if (media && (revealVisible || !isPastRevealLine(media))) {
+        reveal(media, media, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1 });
       }
     });
 
@@ -181,8 +129,8 @@ export function initScrollAnimations() {
   });
 }
 
-export function initPageAnimations() {
-  initScrollAnimations();
+export function initPageAnimations(options?: AnimationOptions) {
+  initScrollAnimations(options);
 
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();

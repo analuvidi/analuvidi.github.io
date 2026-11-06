@@ -8,7 +8,7 @@ import { getContent } from "@/lib/getContent";
 const textDefault =
   "Tenho interesse em novos projetos e oportunidades. Fico à disposição para uma conversa ou para mostrar mais do meu trabalho.";
 const linkClass =
-  "text-base-900 dark:text-white tracking-tight underline underline-offset-4 transition-colors hover:text-accent-700 dark:hover:text-accent-400";
+  "tap-target text-base-900 dark:text-white tracking-tight underline underline-offset-4 transition-colors hover:text-accent-700 dark:hover:text-accent-400";
 ---
 
 <section class="scroll-mt-32" id="contato">
@@ -17,7 +17,7 @@ const linkClass =
       <div class="lg:col-start-2">
         <Text
           tag="p"
-          variant="textSM"
+          variant="textBase"
           class="text-base-600 dark:text-base-300"
           data-editable="sections.contact.eyebrow"
         >
@@ -36,7 +36,7 @@ const linkClass =
         <Text
           tag="p"
           variant="textBase"
-          class="mt-4 text-base-600 dark:text-base-300"
+          class="mt-4 max-w-[58ch] text-base-600 dark:text-base-300"
           data-editable="sections.contact.text"
         >
           {getContent("sections.contact.text", textDefault)}
@@ -44,7 +44,7 @@ const linkClass =
 
         <dl class="mt-12 flex flex-col border-t border-base-200 dark:border-base-800">
           <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
-            <dt class="text-xs uppercase text-base-600 dark:text-base-300">E-mail</dt>
+            <dt class="text-sm uppercase text-base-600 dark:text-base-300">E-mail</dt>
             <dd class="text-base">
               <EditableLink
                 linkKey="contact.email"
@@ -57,7 +57,7 @@ const linkClass =
             </dd>
           </div>
           <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
-            <dt class="text-xs uppercase text-base-600 dark:text-base-300">Telefone</dt>
+            <dt class="text-sm uppercase text-base-600 dark:text-base-300">Telefone</dt>
             <dd class="text-base">
               <EditableLink
                 linkKey="contact.phone"
@@ -70,7 +70,7 @@ const linkClass =
             </dd>
           </div>
           <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
-            <dt class="text-xs uppercase text-base-600 dark:text-base-300">Localização</dt>
+            <dt class="text-sm uppercase text-base-600 dark:text-base-300">Localização</dt>
             <dd class="text-base text-base-900 tracking-tight dark:text-white" data-editable="contact.location">
               {getContent("contact.location", contactInfo.location)}
             </dd>

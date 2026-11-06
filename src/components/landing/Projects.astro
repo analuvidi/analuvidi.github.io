@@ -14,7 +14,7 @@ const projectsEyebrowDefault = "Trabalhos autorais";
       <div class="lg:col-start-2">
         <Text
           tag="p"
-          variant="textSM"
+          variant="textBase"
           class="text-base-600 dark:text-base-300"
           data-editable="sections.projects.eyebrow"
           >{getContent("sections.projects.eyebrow", projectsEyebrowDefault)}</Text
@@ -37,7 +37,6 @@ const projectsEyebrowDefault = "Trabalhos autorais";
             item={item}
             contentPrefix="projects"
             basePath="projeto"
-            large={Boolean(item.image)}
           />
         ))
       }

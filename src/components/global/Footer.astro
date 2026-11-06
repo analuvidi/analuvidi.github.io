@@ -20,19 +20,19 @@ const year = new Date().getFullYear();
   <Wrapper variant="standard" class="py-2">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
       <div
-        class="flex items-center gap-2 text-base-600 dark:text-base-300 text-xs tracking-tight"
+        class="flex items-center gap-2 text-base-600 dark:text-base-300 text-sm tracking-tight"
       >
         {year}
         <Logo />
       </div>
-      <div class="flex flex-wrap gap-8 text-sm items-center">
+      <div class="flex flex-wrap gap-8 text-base items-center">
         {
           links.map((link) => (
             <EditableLink
               linkKey={link.key}
               textKey={link.key}
               href={link.href}
-              class="text-base-600 text-xs tracking-tight transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
+              class="tap-target text-base-600 text-sm tracking-tight transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
             >
               {getContent(link.key, link.text)}
             </EditableLink>

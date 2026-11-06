@@ -12,14 +12,16 @@ interface Props {
   contentPrefix: string;
   backHref: string;
   backLabel: string;
-  eyebrow: string;
 }
 
-const { item, contentPrefix, backHref, backLabel, eyebrow } = Astro.props;
+const { item, contentPrefix, backHref, backLabel } = Astro.props;
 
 const detail = item.detail!;
 const [contextBlock, processBlock, resultBlock] = detail.blocks ?? [];
 const key = (suffix: string) => `${contentPrefix}.${suffix}`;
+const blockLabels = item.blockLabel
+  ? ["01", "02", "03"].map((number) => `${item.blockLabel} ${number}`)
+  : ["Contexto", "Processo", "Resultado"];
 
 const images = item.blockImages ?? {};
 const showHero = !detail.sections && shouldRenderImage(key("image"), item.image);
@@ -35,7 +37,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
   <Wrapper variant="standard">
     <a
       href={backHref}
-      class="text-xs tracking-tight text-base-600 transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
+      class="tap-target text-sm tracking-tight text-base-600 transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
     >
       ← {backLabel}
     </a>
@@ -43,7 +45,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
     <div class="mt-8 grid grid-cols-1 gap-8 border-b border-base-200 pb-12 dark:border-base-800 lg:mt-12 lg:grid-cols-4 lg:items-start lg:gap-12">
       <Text
         tag="p"
-        variant="textXS"
+        variant="textSM"
         class="uppercase text-base-600 dark:text-base-300"
         data-editable={key("year")}
       >
@@ -61,8 +63,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
         </Text>
         <Text
           tag="p"
-          variant="textSM"
-          class="mt-6 text-base-600 dark:text-base-300"
+          variant="textBase"
+          class="mt-6 max-w-[58ch] text-base-600 dark:text-base-300"
           data-editable={key("summary")}
         >
           {getContent(key("summary"), detail.summary)}
@@ -72,7 +74,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
       <aside class="flex flex-col gap-6 border-t border-base-200 pt-6 dark:border-base-800 lg:border-t-0 lg:pt-0">
         <Text
           tag="p"
-          variant="textXS"
+          variant="textSM"
           class="uppercase text-base-600 dark:text-base-300"
           data-editable={key("category")}
         >
@@ -83,7 +85,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             <div>
               <Text
                 tag="p"
-                variant="textXS"
+                variant="textSM"
                 class="uppercase text-base-500 dark:text-base-400"
                 data-editable={key(`meta.${index}.label`)}
               >
@@ -91,7 +93,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
+                variant="textBase"
                 class="mt-1 text-base-700 dark:text-base-200"
                 data-editable={key(`meta.${index}.value`)}
               >
@@ -126,12 +128,12 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
         >
           <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
             <div class="lg:col-span-3">
-              <Text tag="p" variant="textXS" class="uppercase text-base-600 dark:text-base-300">
-                {eyebrow} 01
+              <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
+                {blockLabels[0]}
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
+                variant="textBase"
                 class="mt-6 max-w-xs text-base-500 dark:text-base-400"
                 data-editable={key("blocks.0.aside")}
               >
@@ -150,8 +152,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
-                class="mt-4 text-base-600 dark:text-base-300"
+                variant="textBase"
+                class="mt-4 max-w-[58ch] text-base-600 dark:text-base-300"
                 data-editable={key("blocks.0.text")}
               >
                 {getContent(key("blocks.0.text"), contextBlock.text)}
@@ -197,8 +199,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             }
 
             <div class={showProcess ? "order-1 lg:order-2 lg:col-span-4 lg:col-start-6" : "order-1 lg:col-span-6 lg:col-start-7"}>
-              <Text tag="p" variant="textXS" class="uppercase text-base-600 dark:text-base-300">
-                {eyebrow} 02
+              <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
+                {blockLabels[1]}
               </Text>
               <Text
                 tag="h2"
@@ -210,8 +212,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
-                class="mt-4 text-base-600 dark:text-base-300"
+                variant="textBase"
+                class="mt-4 max-w-[58ch] text-base-600 dark:text-base-300"
                 data-editable={key("blocks.1.text")}
               >
                 {getContent(key("blocks.1.text"), processBlock.text)}
@@ -221,7 +223,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             <div class={showProcess ? "order-3 lg:col-span-3 lg:col-start-10 lg:row-start-1" : "order-3 lg:col-span-3 lg:col-start-1 lg:row-start-1"}>
               <Text
                 tag="p"
-                variant="textSM"
+                variant="textBase"
                 class:list={["max-w-xs text-base-500 dark:text-base-400", showProcess && "lg:ml-auto lg:text-right"]}
                 data-editable={key("blocks.1.aside")}
               >
@@ -260,8 +262,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
       resultBlock && (
         <section class="mt-16 border-t border-base-200 pt-12 dark:border-base-800 lg:mt-24 lg:pt-16">
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
-            <Text tag="p" variant="textXS" class="uppercase text-base-600 dark:text-base-300">
-              {eyebrow} 03
+            <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
+              {blockLabels[2]}
             </Text>
 
             <div class="lg:col-span-2">
@@ -275,8 +277,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
-                class="mt-4 text-base-600 dark:text-base-300"
+                variant="textBase"
+                class="mt-4 max-w-[58ch] text-base-600 dark:text-base-300"
                 data-editable={key("blocks.2.text")}
               >
                 {getContent(key("blocks.2.text"), resultBlock.text)}
@@ -285,7 +287,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
 
             <Text
               tag="p"
-              variant="textSM"
+              variant="textBase"
               class="text-base-500 lg:ml-auto lg:max-w-xs lg:text-right dark:text-base-400"
               data-editable={key("blocks.2.aside")}
             >
@@ -321,7 +323,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             <div class="lg:col-span-3">
               <Text
                 tag="p"
-                variant="textXS"
+                variant="textSM"
                 class="uppercase text-base-600 dark:text-base-300"
                 data-editable={key(`sections.${index}.label`)}
               >
@@ -331,7 +333,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
                 section.aside && (
                   <Text
                     tag="p"
-                    variant="textSM"
+                    variant="textBase"
                     class="mt-6 max-w-xs text-base-500 dark:text-base-400"
                     data-editable={key(`sections.${index}.aside`)}
                   >
@@ -351,8 +353,8 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
               <Text
                 tag="p"
-                variant="textSM"
-                class="mt-4 text-base-600 dark:text-base-300"
+                variant="textBase"
+                class="mt-4 max-w-[58ch] text-base-600 dark:text-base-300"
                 data-editable={key(`sections.${index}.text`)}
               >
                 {getContent(key(`sections.${index}.text`), section.text)}
@@ -388,7 +390,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
     <div class="mt-16 border-t border-base-200 pt-10 dark:border-base-800 lg:mt-24">
       <a
         href={backHref}
-        class="text-xs tracking-tight text-base-600 transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
+        class="tap-target text-sm tracking-tight text-base-600 transition-colors hover:text-accent-700 dark:text-base-300 dark:hover:text-accent-400"
       >
         ← {backLabel}
       </a>

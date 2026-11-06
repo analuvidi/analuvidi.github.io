@@ -13,23 +13,22 @@ interface Props {
   contentPrefix: string;
   /** Rota base da página do case: "trabalho" ou "projeto". */
   basePath: string;
-  large?: boolean;
 }
 
-const { item, contentPrefix, basePath, large = false } = Astro.props;
+const { item, contentPrefix, basePath } = Astro.props;
 
 const key = (suffix: string) => `${contentPrefix}.${item.slug}.${suffix}`;
 const detailHref = item.detail ? `/${basePath}/${item.slug}` : undefined;
 const showImage = Boolean(detailHref) && shouldRenderImage(key("image"), item.image);
 const linkClass =
-  "mt-6 inline-block text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400";
+  "tap-target mt-6 inline-block text-sm tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400";
 ---
 
 <article class="py-12 border-t border-base-200 dark:border-base-800">
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-start">
     <Text
       tag="p"
-      variant="textXS"
+      variant="textSM"
       class="text-base-600 dark:text-base-300 uppercase"
       data-editable={key("year")}
     >
@@ -38,7 +37,7 @@ const linkClass =
     <div>
       <Text
         tag="h3"
-        variant={large ? "displaySM" : "textLG"}
+        variant="textLG"
         class="text-base-900 dark:text-white leading-tight font-semibold"
         data-editable={key("title")}
       >
@@ -48,7 +47,7 @@ const linkClass =
         item.organization && (
           <Text
             tag="p"
-            variant="textSM"
+            variant="textBase"
             class="mt-2 text-base-600 dark:text-base-300"
             data-editable={key("organization")}
           >
@@ -60,7 +59,7 @@ const linkClass =
     <div>
       <Text
         tag="p"
-        variant="textSM"
+        variant="textBase"
         class="text-base-600 dark:text-base-300"
         data-editable={key("description")}
       >
@@ -90,7 +89,7 @@ const linkClass =
     <div>
       <Text
         tag="p"
-        variant="textXS"
+        variant="textSM"
         class="text-base-900 dark:text-white uppercase lg:text-right"
         data-editable={key("category")}
       >

@@ -1,15 +1,23 @@
 ---
-const title = "Ana Luiza Vidigal — Portfólio";
-const description =
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = "Ana Luiza Vidigal — Portfólio";
+const defaultDescription =
   "Portfólio de Ana Luiza Ferreira Vidigal: criatividade, comunicação e tecnologia. Canva, Figma, UX/UI, atendimento ao público e inteligência artificial.";
+
+const { title, description = defaultDescription } = Astro.props;
+const pageTitle = title ? `${title} — Ana Luiza Vidigal` : siteName;
 ---
 
-<title>{title}</title>
+<title>{pageTitle}</title>
 <meta name="description" content={description} />
 
 <!-- Open Graph -->
-<meta property="og:title" content={title} />
+<meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:site_name" content={title} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pt_BR" />

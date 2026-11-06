@@ -14,7 +14,7 @@ const workEyebrowDefault = "Da mais recente à mais antiga";
       <div class="lg:col-start-2">
         <Text
           tag="p"
-          variant="textSM"
+          variant="textBase"
           class="text-base-600 dark:text-base-300"
           data-editable="sections.work.eyebrow"
           >{getContent("sections.work.eyebrow", workEyebrowDefault)}</Text
@@ -37,7 +37,6 @@ const workEyebrowDefault = "Da mais recente à mais antiga";
             item={item}
             contentPrefix="work"
             basePath="trabalho"
-            large={item.featured}
           />
         ))
       }
@@ -46,7 +45,7 @@ const workEyebrowDefault = "Da mais recente à mais antiga";
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-start">
           <Text
             tag="p"
-            variant="textXS"
+            variant="textSM"
             class="text-base-600 dark:text-base-300 uppercase"
             data-editable="sections.work.compactTitle"
           >
@@ -54,7 +53,7 @@ const workEyebrowDefault = "Da mais recente à mais antiga";
           </Text>
           <Text
             tag="p"
-            variant="textSM"
+            variant="textBase"
             class="text-base-600 dark:text-base-300"
             data-editable="sections.work.compactText"
           >
@@ -69,17 +68,17 @@ const workEyebrowDefault = "Da mais recente à mais antiga";
             {
               compactWorkItems.map((item, index) => (
                 <li class="grid grid-cols-1 gap-1 sm:grid-cols-2 sm:gap-4">
-                  <div class="text-sm text-base-900 dark:text-white">
+                  <div class="text-base text-base-900 dark:text-white">
                     <span data-editable={`work.compact.${index}.title`}>
                       {getContent(`work.compact.${index}.title`, item.title)}
                     </span>
-                    <span class="block text-xs uppercase text-base-600 dark:text-base-300">
+                    <span class="block text-sm uppercase text-base-600 dark:text-base-300">
                       <span data-editable={`work.compact.${index}.year`}>
                         {getContent(`work.compact.${index}.year`, item.year)}
                       </span>
                     </span>
                   </div>
-                  <div class="text-sm text-base-600 dark:text-base-300">
+                  <div class="text-base text-base-600 dark:text-base-300">
                     <span data-editable={`work.compact.${index}.organization`}>{getContent(`work.compact.${index}.organization`, item.organization)}</span>.
                     <span data-editable={`work.compact.${index}.description`}>
                       {getContent(`work.compact.${index}.description`, item.description)}

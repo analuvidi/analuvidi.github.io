@@ -1,5 +1,6 @@
 ---
 // Fundations
+import Button from "@/components/fundations/elements/Button.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import { getContent } from "@/lib/getContent";
@@ -11,40 +12,46 @@ const introSupportDefault =
 ---
 
 <section>
-  <Wrapper variant="standard" class="pb-8 pt-40 lg:pt-80">
+  <Wrapper variant="standard" class="pb-8 pt-32 lg:pt-40">
     <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
+      <Text
+        tag="h1"
+        variant="displayXL"
+        class="font-semibold leading-tight text-left tracking-tighter text-base-900 dark:text-white lg:col-span-3"
+        data-editable="intro.text"
+      >
+        {getContent("intro.text", introDefault)}
+      </Text>
       <div class="lg:col-span-2 lg:col-start-3">
         <Text
-          tag="h1"
-          variant="displayLG"
-          class="font-semibold leading-snug text-left tracking-tighter text-base-900 dark:text-white"
-          data-editable="intro.text"
-        >
-          {getContent("intro.text", introDefault)}
-        </Text>
-        <Text
           tag="p"
-          variant="textBase"
-          class="mt-6 max-w-xl text-base-600 dark:text-base-300"
+          variant="textLG"
+          class="max-w-xl text-base-600 dark:text-base-300"
           data-editable="intro.support"
         >
           {getContent("intro.support", introSupportDefault)}
         </Text>
-        <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-          <a
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Button
+            isLink
             href="#projects"
+            variant="none"
+            size="md"
             data-cursor-magnetic
-            class="text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400"
+            class="bg-base-900 px-6 text-white hover:bg-accent-700 dark:bg-white dark:text-base-900 dark:hover:bg-accent-400"
           >
             Ver projetos
-          </a>
-          <a
+          </Button>
+          <Button
+            isLink
             href="#contato"
+            variant="none"
+            size="md"
             data-cursor-magnetic
-            class="text-xs tracking-tight text-base-900 underline underline-offset-4 transition-colors hover:text-accent-700 dark:text-white dark:hover:text-accent-400"
+            class="border border-base-300 px-6 text-base-900 hover:border-base-900 dark:border-base-700 dark:text-white dark:hover:border-white"
           >
             Entrar em contato
-          </a>
+          </Button>
         </div>
       </div>
     </div>

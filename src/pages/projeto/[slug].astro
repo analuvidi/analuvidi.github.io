@@ -17,12 +17,11 @@ if (!item) {
 }
 ---
 
-<BaseLayout>
+<BaseLayout title={item.title} description={item.detail?.summary ?? item.description}>
   <CaseDetail
     item={item}
     contentPrefix={`projects.${item.slug}`}
     backHref="/#projects"
     backLabel="Voltar para Projetos"
-    eyebrow={item.blockLabel ?? "Parte"}
   />
 </BaseLayout>

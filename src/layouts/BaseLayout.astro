@@ -11,23 +11,56 @@ import CustomCursor from "@/components/global/CustomCursor";
 import EditModeButton from "@/components/global/EditModeButton";
 import EditLinkModal from "@/components/global/EditLinkModal";
 import ApplyContentOverrides from "@/components/global/ApplyContentOverrides.astro";
+
+interface Props {
+  /** Título da aba. Sem ele, vale o nome do site. */
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
   <head>
-    <BaseHead />
+    <BaseHead title={title} description={description} />
+    <script is:inline>
+      // Decide antes da primeira pintura, para o conteúdo não piscar atrás do loader.
+      (function () {
+        var seen = true;
+        try {
+          seen = sessionStorage.getItem("loader-seen") === "1";
+          sessionStorage.setItem("loader-seen", "1");
+        } catch (error) {}
+
+        if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        var root = document.documentElement;
+        root.classList.add("has-loader");
+        // Se o JS do loader não carregar, o conteúdo não fica preso atrás dele.
+        setTimeout(function () {
+          root.classList.remove("has-loader");
+        }, 4000);
+      })();
+    </script>
     <script is:inline define:vars={{ contentOverrides }}>
       window.__CONTENT_OVERRIDES__ = contentOverrides;
     </script>
   </head>
   <body class="bg-white dark:bg-base-950 min-h-svh">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-base-900 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-white dark:focus:bg-white dark:focus:text-base-900"
+    >
+      Pular para o conteúdo
+    </a>
     <ApplyContentOverrides />
     <CustomCursor client:load />
     <PageLoader />
     <ScrollAnimations />
     <div id="page-content">
       <Navigation />
-      <main class="pb-12"><slot /></main>
+      <main id="conteudo" tabindex="-1" class="pb-12 outline-none"><slot /></main>
       <Footer />
       <div aria-hidden="true" class="h-[12vh]"></div>
     </div>

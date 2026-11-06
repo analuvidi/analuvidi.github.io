@@ -13,23 +13,30 @@ const links = [
   { href: "/#projects", text: "Projetos" },
   { href: "/#education", text: "Formação" },
 ];
+
+// O estado da seção atual vem do script abaixo, via aria-current.
+const currentClass =
+  "aria-[current=true]:text-base-900 aria-[current=true]:underline aria-[current=true]:underline-offset-4 dark:aria-[current=true]:text-white";
 ---
 
 <nav class="bg-white dark:bg-base-950 fixed top-0 z-10 w-full">
-  <Wrapper variant="standard" class="py-2">
+  <Wrapper variant="standard" class="py-2 pointer-coarse:py-0">
     <div class="grid grid-cols-3 lg:grid-cols-4 items-start">
-      <a href="/" class="group flex">
+      <a href="/" class="tap-target group flex">
         <Logo
-          class="text-base-600 dark:text-base-300 text-xs tracking-tight font-base-900 transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
+          class="text-base-600 dark:text-base-300 text-sm tracking-tight font-base-900 transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
         />
       </a>
-      <div class="hidden lg:col-start-3 lg:flex gap-x-6 whitespace-nowrap text-sm items-center">
+      <div class="hidden lg:col-start-3 lg:flex gap-x-6 whitespace-nowrap text-base items-center">
         {
           links.map((link) => (
             <a
               href={link.href}
               data-cursor-magnetic
-              class="text-base-600 dark:text-base-300 tracking-tight text-xs transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+              class:list={[
+                "tap-target text-base-600 dark:text-base-300 tracking-tight text-sm transition-colors hover:text-accent-700 dark:hover:text-accent-400",
+                currentClass,
+              ]}
             >
               {link.text}
             </a>
@@ -41,18 +48,24 @@ const links = [
           linkKey="nav.contact"
           href="/#contato"
           data-cursor-magnetic
-          class="text-base-600 dark:text-base-300 text-xs tracking-tight font-base transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+          class={`tap-target text-base-600 dark:text-base-300 text-sm tracking-tight font-base transition-colors hover:text-accent-700 dark:hover:text-accent-400 ${currentClass}`}
         >
           {getContent("nav.contact", "Contato")}
         </EditableLink>
       </div>
     </div>
-    <div class="mt-2 flex justify-between gap-3 overflow-x-auto scrollbar-hide sm:justify-start sm:gap-5 lg:hidden">
+    <div
+      data-nav-scroller
+      class="mt-2 flex justify-between gap-4 overflow-x-auto scrollbar-hide pointer-coarse:mt-0 sm:justify-start sm:gap-5 lg:hidden"
+    >
       {
         links.map((link) => (
           <a
             href={link.href}
-            class="shrink-0 text-base-600 dark:text-base-300 tracking-tight text-xs transition-colors hover:text-accent-700 dark:hover:text-accent-400"
+            class:list={[
+              "tap-target shrink-0 text-base-600 dark:text-base-300 tracking-tight text-sm transition-colors hover:text-accent-700 dark:hover:text-accent-400",
+              currentClass,
+            ]}
           >
             {link.text}
           </a>
@@ -61,3 +74,50 @@ const links = [
     </div>
   </Wrapper>
 </nav>
+
+<script>
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('nav a[href^="/#"]'));
+  const scroller = document.querySelector<HTMLElement>("[data-nav-scroller]");
+  let currentId: string | null = null;
+
+  function setCurrent(id: string | null) {
+    currentId = id;
+
+    links.forEach((link) => {
+      if (link.hash !== `#${id}`) {
+        link.removeAttribute("aria-current");
+        return;
+      }
+
+      link.setAttribute("aria-current", "true");
+
+      // No celular a lista rola de lado: mantém o item atual à vista.
+      if (scroller?.contains(link) && scroller.scrollWidth > scroller.clientWidth) {
+        scroller.scrollTo({
+          left: link.offsetLeft - scroller.offsetLeft - (scroller.clientWidth - link.offsetWidth) / 2,
+        });
+      }
+    });
+  }
+
+  if (location.pathname.startsWith("/trabalho")) {
+    setCurrent("work");
+  } else if (location.pathname.startsWith("/projeto")) {
+    setCurrent("projects");
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setCurrent(entry.target.id);
+          else if (entry.target.id === currentId) setCurrent(null);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+
+    links.forEach((link) => {
+      const section = document.getElementById(link.hash.slice(1));
+      if (section) observer.observe(section);
+    });
+  }
+</script>

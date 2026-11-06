@@ -16,7 +16,7 @@ const paragraphs = [
       <div class="lg:col-start-2">
         <Text
           tag="p"
-          variant="textSM"
+          variant="textBase"
           class="text-base-600 dark:text-base-300"
           data-editable="sections.about.eyebrow"
         >
@@ -40,8 +40,8 @@ const paragraphs = [
             paragraphs.map((paragraph, index) => (
               <Text
                 tag="p"
-                variant="textSM"
-                class="text-base-600 dark:text-base-300"
+                variant="textBase"
+                class="max-w-[58ch] text-base-600 dark:text-base-300"
                 data-editable={`about.${index}`}
               >
                 {getContent(`about.${index}`, paragraph)}

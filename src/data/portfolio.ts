@@ -63,8 +63,6 @@ export type PortfolioCase = {
   description: string;
   category: string;
   skills?: string[];
-  /** Itens com título maior. */
-  featured?: boolean;
   /** Imagem de capa (lista e página do case). Sem imagem, nada é exibido em produção. */
   image?: ImageMetadata;
   imageAlt?: string;
@@ -84,7 +82,7 @@ export type PortfolioCase = {
   link?: { href: string; label: string };
   /** Só itens com `detail` ganham página própria. */
   detail?: CaseDetail;
-  /** Rótulo dos blocos da página do case ("Parte 01", "Tela 01"...). */
+  /** Numera os blocos da página do case ("Tela 01"...). Sem ele: Contexto, Processo e Resultado. */
   blockLabel?: string;
 };
 
@@ -203,7 +201,6 @@ export const workItems: PortfolioCase[] = [
       "Desenvolvi e mantive interfaces de aplicações mobile, implementei funcionalidades, corrigi bugs e validei entregas, em equipe, com Git e metodologias ágeis.",
     category: "Estágio",
     skills: ["TypeScript", "React", "Consulta em banco de dados", "Metodologias ágeis", "Git e GitHub"],
-    featured: true,
   },
   {
     slug: "monitoria-design-de-interacao",
@@ -214,7 +211,6 @@ export const workItems: PortfolioCase[] = [
       "Apoiei estudantes em projetos de UX/UI, planejei e ministrei um minicurso introdutório de Figma, criei materiais didáticos e exercícios práticos e orientei a criação de wireframes e protótipos interativos.",
     category: "Monitoria",
     skills: ["Figma", "UX/UI", "Wireframes", "Protótipos", "Didática"],
-    featured: true,
     blockImages: {
       process: monitoriaSlideCapa,
       processAlt:
@@ -260,7 +256,6 @@ export const workItems: PortfolioCase[] = [
       "Fiz a prospecção e a qualificação de clientes, conduzi reuniões de alinhamento, levantei necessidades e participei da prototipação dos projetos. Foi meu contato direto com a relação entre empresa e cliente.",
     category: "Empresa júnior",
     skills: ["Prospecção", "Reuniões com clientes", "Levantamento de necessidades", "Prototipação"],
-    featured: true,
   },
 ];
 

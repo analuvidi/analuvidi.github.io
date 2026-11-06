@@ -2,24 +2,25 @@
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { initPageAnimations, refreshScrollAnimations } from "@/lib/scrollAnimations";
 
-  function setup() {
-    initPageAnimations();
-    window.setTimeout(() => ScrollTrigger.refresh(), 150);
+  function setup(revealVisible = false) {
+    initPageAnimations({ revealVisible });
+    window.setTimeout(() => {
+      ScrollTrigger.refresh();
+      // Só depois do refresh: antes, ele cancela a rolagem até a âncora ao abrir a página.
+      document.documentElement.classList.add("motion-safe:scroll-smooth");
+    }, 150);
   }
-
-  window.addEventListener("page-loader-complete", setup, { once: true });
 
   window.addEventListener("content-overrides-applied", () => {
     refreshScrollAnimations();
     window.setTimeout(() => ScrollTrigger.refresh(), 150);
   });
 
-  const loader = document.getElementById("page-loader");
-  if (!loader) {
-    if (document.readyState === "complete") {
-      setup();
-    } else {
-      window.addEventListener("load", setup, { once: true });
-    }
+  if (document.documentElement.classList.contains("has-loader")) {
+    window.addEventListener("page-loader-complete", () => setup(true), { once: true });
+  } else if (document.readyState === "complete") {
+    setup();
+  } else {
+    window.addEventListener("load", () => setup(), { once: true });
   }
 </script>
