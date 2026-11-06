@@ -57,19 +57,6 @@ const linkClass =
             </dd>
           </div>
           <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
-            <dt class="text-sm uppercase text-base-600 dark:text-base-300">Telefone</dt>
-            <dd class="text-base">
-              <EditableLink
-                linkKey="contact.phone"
-                href={contactInfo.phoneHref}
-                data-cursor-magnetic
-                class={linkClass}
-              >
-                {getContent("contact.phone", contactInfo.phone)}
-              </EditableLink>
-            </dd>
-          </div>
-          <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
             <dt class="text-sm uppercase text-base-600 dark:text-base-300">GitHub</dt>
             <dd class="text-base">
               <EditableLink
@@ -80,12 +67,6 @@ const linkClass =
               >
                 {getContent("contact.github", contactInfo.github.replace("https://", ""))}
               </EditableLink>
-            </dd>
-          </div>
-          <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-base-200 py-4 dark:border-base-800">
-            <dt class="text-sm uppercase text-base-600 dark:text-base-300">Localização</dt>
-            <dd class="text-base text-base-900 tracking-tight dark:text-white" data-editable="contact.location">
-              {getContent("contact.location", contactInfo.location)}
             </dd>
           </div>
         </dl>

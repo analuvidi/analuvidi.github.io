@@ -15,6 +15,6 @@ export default defineConfig({
   },
   ...(isDev && { image: { service: passthroughImageService() } }),
 
-  site: 'https://yourdomain.com',
-  integrations: [sitemap({ filter: (page) => !page.includes('/system/') }), react()]
+  site: 'https://analuvidi.github.io',
+  integrations: [sitemap(), react()]
 });

@@ -289,6 +289,7 @@ export const projectItems: PortfolioCase[] = [
     description:
       "Landing page conceitual de um spa urbano fictício, do naming ao front-end. A palavra quer dizer fôlego, e a respiração virou a linguagem visual do site.",
     category: "Projeto autoral",
+    link: { href: "https://analuvidi.github.io/AlentoLP/", label: "Ver site ↗" },
     skills: ["Naming", "Identidade visual", "Direção de arte", "Copy", "React"],
     image: alentoCapa,
     imageAlt:
@@ -449,6 +450,19 @@ export const projectItems: PortfolioCase[] = [
               type: "image",
               src: bestiarioProposta,
               alt: "Prancha da proposta: a página inicial do site e as três ações do menu, Início, Cladograma e Adicionar.",
+            },
+          ],
+        },
+        {
+          label: "O site em um minuto",
+          heading: "Uma volta pela interface",
+          text: "Como o projeto ainda não está publicado, esta gravação mostra o percurso completo: da página inicial ao cladograma, da ficha de uma espécie ao formulário, até o modo escuro.",
+          media: [
+            {
+              type: "video",
+              src: "/media/bestiario/interface.mp4",
+              poster: "/media/bestiario/interface.webp",
+              alt: "Gravação do site: a página inicial, os ramos do cladograma se abrindo, a ficha de uma espécie, o formulário de adição e o modo escuro.",
             },
           ],
         },
@@ -624,9 +638,6 @@ export const educationItems: EducationItem[] = [
 
 export const contactInfo = {
   email: "analvidigal@gmail.com",
-  phone: "",
-  phoneHref: "",
-  location: "",
   github: "https://github.com/analuvidi",
 };
 

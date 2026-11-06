@@ -73,28 +73,28 @@ const detailLabel = basePath === "projeto" ? "Ver projeto" : "Ver mais";
       >
         {getContent(key("description"), item.description)}
       </Text>
-      {
-        detailHref && (
-          <div class:list={[showImage && "hidden lg:block"]}>
+      <div class:list={[showImage ? "hidden lg:flex" : "flex", "flex-wrap gap-x-6"]}>
+        {
+          detailHref && (
             <a href={detailHref} data-cursor-magnetic class={linkClass}>
               {detailLabel}
             </a>
-          </div>
-        )
-      }
-      {
-        item.link && (
-          <a
-            href={item.link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor-magnetic
-            class={linkClass}
-          >
-            {item.link.label}
-          </a>
-        )
-      }
+          )
+        }
+        {
+          item.link && (
+            <a
+              href={item.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-magnetic
+              class={linkClass}
+            >
+              {item.link.label}
+            </a>
+          )
+        }
+      </div>
     </div>
     <div>
       <Text
@@ -126,10 +126,23 @@ const detailLabel = basePath === "projeto" ? "Ver projeto" : "Ver mais";
   }
   {
     showImage && detailHref && (
-      <div class="lg:hidden">
+      <div class="flex flex-wrap gap-x-6 lg:hidden">
         <a href={detailHref} data-cursor-magnetic class={linkClass}>
           {detailLabel}
         </a>
+        {
+          item.link && (
+            <a
+              href={item.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-magnetic
+              class={linkClass}
+            >
+              {item.link.label}
+            </a>
+          )
+        }
       </div>
     )
   }
