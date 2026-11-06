@@ -110,19 +110,6 @@ export type EducationItem = {
 export const skillItems: SkillItem[] = [
   {
     category: "Criação e design",
-    title: "Canva",
-    description:
-      "Minha ferramenta para criar materiais gráficos, apresentações e peças de comunicação digital: compor, testar layouts e organizar a informação até a mensagem ficar clara.",
-    tags: [
-      "Materiais gráficos",
-      "Composição visual",
-      "Apresentações",
-      "Layouts",
-      "Comunicação digital",
-    ],
-  },
-  {
-    category: "Criação e design",
     title: "Figma",
     description:
       "Onde transformo ideias em wireframes, protótipos e interfaces. Foi a ferramenta central da monitoria de Design de Interação, onde ministrei um minicurso introdutório, e do app de leitura que está em Projetos.",
@@ -136,10 +123,17 @@ export const skillItems: SkillItem[] = [
   },
   {
     category: "Criação e design",
-    title: "CapCut",
+    title: "Canva e CapCut",
     description:
-      "Editor de vídeo com o qual já tive contato, para quando a comunicação pede imagem em movimento.",
-    tags: ["Edição de vídeo"],
+      "Minha ferramenta para criar materiais gráficos, apresentações e peças de comunicação digital: compor, testar layouts e organizar a informação até a mensagem ficar clara. No CapCut, dou os primeiros passos em edição de vídeo.",
+    tags: [
+      "Materiais gráficos",
+      "Composição visual",
+      "Apresentações",
+      "Layouts",
+      "Comunicação digital",
+      "Edição de vídeo",
+    ],
   },
   {
     category: "Inteligência artificial e automação",
@@ -161,15 +155,10 @@ export const skillItems: SkillItem[] = [
       "Os anos de atendimento ao público e a experiência comercial na Proton me ensinaram a entender o que a pessoa do outro lado precisa antes de sugerir qualquer solução.",
     tags: [
       "Escuta ativa",
-      "Empatia",
       "Atendimento ao cliente",
       "Prospecção comercial",
       "Levantamento de necessidades",
       "Trabalho em equipe",
-      "Organização",
-      "Proatividade",
-      "Adaptabilidade",
-      "Aprendizado contínuo",
       "Inglês intermediário",
     ],
   },

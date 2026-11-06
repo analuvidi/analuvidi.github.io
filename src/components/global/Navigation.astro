@@ -8,33 +8,33 @@ import { getContent } from "@/lib/getContent";
 
 const links = [
   { href: "/#sobre", text: "Sobre" },
-  { href: "/#skills", text: "Competências" },
-  { href: "/#work", text: "Experiência" },
   { href: "/#projects", text: "Projetos" },
+  { href: "/#work", text: "Experiência" },
+  { href: "/#skills", text: "Competências" },
   { href: "/#education", text: "Formação" },
 ];
 
 // O estado da seção atual vem do script abaixo, via aria-current.
 const currentClass =
-  "aria-[current=true]:text-base-900 aria-[current=true]:underline aria-[current=true]:underline-offset-4 dark:aria-[current=true]:text-white";
+  "aria-[current=true]:text-accent-700 aria-[current=true]:underline aria-[current=true]:underline-offset-4 dark:aria-[current=true]:text-accent-400";
 ---
 
-<nav class="bg-white dark:bg-base-950 fixed top-0 z-10 w-full">
-  <Wrapper variant="standard" class="py-2 pointer-coarse:py-0">
-    <div class="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-4 items-start">
-      <a href="/" class="tap-target group flex">
+<nav class="bg-white dark:bg-[#0d0d0d] fixed top-0 z-10 w-full">
+  <Wrapper variant="standard" class="py-5 pointer-coarse:py-1">
+    <div class="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-4 items-center">
+      <a href="/" class="tap-target group flex whitespace-nowrap">
         <Logo
-          class="text-base-600 dark:text-base-300 text-sm tracking-tight font-base-900 transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
+          class="text-base-900 dark:text-white text-lg font-medium tracking-tight transition-colors group-hover:text-accent-700 dark:group-hover:text-accent-400"
         />
       </a>
-      <div class="hidden lg:col-start-3 lg:flex gap-x-4 xl:gap-x-6 whitespace-nowrap text-base items-center">
+      <div class="hidden lg:col-start-3 lg:flex gap-x-3 xl:gap-x-6 whitespace-nowrap text-base items-center">
         {
           links.map((link) => (
             <a
               href={link.href}
               data-cursor-magnetic
               class:list={[
-                "tap-target text-base-600 dark:text-base-300 tracking-tight text-sm transition-colors hover:text-accent-700 dark:hover:text-accent-400",
+                "tap-target text-base-600 dark:text-base-300 tracking-tight text-[0.9375rem] xl:text-base transition-colors hover:text-accent-700 dark:hover:text-accent-400",
                 currentClass,
               ]}
             >
@@ -48,7 +48,7 @@ const currentClass =
           linkKey="nav.contact"
           href="/#contato"
           data-cursor-magnetic
-          class={`tap-target text-base-600 dark:text-base-300 text-sm tracking-tight font-base transition-colors hover:text-accent-700 dark:hover:text-accent-400 ${currentClass}`}
+          class={`tap-target text-base-600 dark:text-base-300 text-[0.9375rem] xl:text-base tracking-tight font-base transition-colors hover:text-accent-700 dark:hover:text-accent-400 ${currentClass}`}
         >
           {getContent("nav.contact", "Contato")}
         </EditableLink>
@@ -63,7 +63,7 @@ const currentClass =
           <a
             href={link.href}
             class:list={[
-              "tap-target shrink-0 text-base-600 dark:text-base-300 tracking-tight text-sm transition-colors hover:text-accent-700 dark:hover:text-accent-400",
+              "tap-target shrink-0 text-base-600 dark:text-base-300 tracking-tight text-[0.9375rem] transition-colors hover:text-accent-700 dark:hover:text-accent-400",
               currentClass,
             ]}
           >
