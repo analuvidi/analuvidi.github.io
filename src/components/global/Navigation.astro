@@ -19,7 +19,7 @@ const currentClass =
   "aria-[current=true]:text-accent-700 aria-[current=true]:underline aria-[current=true]:underline-offset-4 dark:aria-[current=true]:text-accent-400";
 ---
 
-<nav class="bg-white dark:bg-[#0d0d0d] fixed top-0 z-10 w-full">
+<nav class="bg-white dark:bg-[#0d0d0d] fixed top-0 z-10 w-full transition-transform duration-200 motion-reduce:transition-none">
   <Wrapper variant="standard" class="py-5 pointer-coarse:py-1">
     <div class="grid grid-cols-3 lg:grid-cols-4 lg:gap-x-4 items-center">
       <a href="/" class="tap-target group flex whitespace-nowrap">
@@ -43,7 +43,7 @@ const currentClass =
           ))
         }
       </div>
-      <div class="col-start-3 flex justify-end lg:col-start-4">
+      <div class="hidden justify-end lg:col-start-4 lg:flex">
         <EditableLink
           linkKey="nav.contact"
           href="/#contato"
@@ -59,7 +59,7 @@ const currentClass =
       class="mt-2 flex justify-between gap-4 overflow-x-auto scrollbar-hide pointer-coarse:mt-0 sm:justify-start sm:gap-5 lg:hidden"
     >
       {
-        links.map((link) => (
+        [...links, { href: "/#contato", text: "Contato" }].map((link) => (
           <a
             href={link.href}
             class:list={[
@@ -120,4 +120,20 @@ const currentClass =
       if (section) observer.observe(section);
     });
   }
+
+  // No celular, ao rolar, só a lista de seções fica à vista. Quem navega por
+  // teclado continua vendo o cabeçalho inteiro.
+  const nav = document.querySelector<HTMLElement>("nav");
+
+  function updateCompact() {
+    if (!nav || !scroller) return;
+
+    const compact = window.scrollY > 80 && !nav.querySelector(":focus-visible");
+    nav.style.transform = compact ? `translateY(-${scroller.offsetTop}px)` : "";
+  }
+
+  window.addEventListener("scroll", updateCompact, { passive: true });
+  window.addEventListener("resize", updateCompact);
+  nav?.addEventListener("focusin", updateCompact);
+  updateCompact();
 </script>

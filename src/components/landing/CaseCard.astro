@@ -66,9 +66,9 @@ const linkClass =
         {getContent(key("description"), item.description)}
       </Text>
       {
-        detailHref && !showImage && (
+        detailHref && (
           <a href={detailHref} data-cursor-magnetic class={linkClass}>
-            Ver mais
+            {basePath === "projeto" ? "Ver projeto" : "Ver mais"}
           </a>
         )
       }

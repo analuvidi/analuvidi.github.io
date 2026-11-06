@@ -42,7 +42,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
       ← {backLabel}
     </a>
 
-    <div class="mt-8 grid grid-cols-1 gap-8 border-b border-base-200 pb-12 dark:border-base-800 lg:mt-12 lg:grid-cols-4 lg:items-start lg:gap-12">
+    <div class="mt-8 grid grid-cols-1 gap-8 border-b border-base-200 pb-12 dark:border-base-800 lg:mt-12 lg:grid-cols-4 lg:items-start lg:gap-x-4 lg:gap-y-12">
       <Text
         tag="p"
         variant="textSM"
@@ -126,7 +126,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             showHero && "mt-16 border-t border-base-200 dark:border-base-800 lg:mt-24",
           ]}
         >
-          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
+          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-x-4 lg:gap-y-12 lg:items-start">
             <div class="lg:col-span-3">
               <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
                 {blockLabels[0]}
@@ -141,7 +141,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               </Text>
             </div>
 
-            <div class={showContext ? "lg:col-span-4" : "lg:col-span-6 lg:col-start-7"}>
+            <div class={showContext ? "lg:col-span-4 lg:pr-8" : "lg:col-span-6 lg:col-start-7"}>
               <Text
                 tag="h2"
                 variant="textLG"
@@ -182,7 +182,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
     {
       processBlock && (
         <section class="mt-16 border-t border-base-200 pt-12 dark:border-base-800 lg:mt-24 lg:pt-16">
-          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 lg:items-center">
+          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-x-4 lg:gap-y-12 lg:items-center">
             {
               showProcess && (
                 <div class="order-2 lg:order-1 lg:col-span-5">
@@ -198,7 +198,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
               )
             }
 
-            <div class={showProcess ? "order-1 lg:order-2 lg:col-span-4 lg:col-start-6" : "order-1 lg:col-span-6 lg:col-start-7"}>
+            <div class={showProcess ? "order-1 lg:order-2 lg:col-span-4 lg:col-start-6 lg:pl-8" : "order-1 lg:col-span-6 lg:col-start-7"}>
               <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
                 {blockLabels[1]}
               </Text>
@@ -261,7 +261,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
     {
       resultBlock && (
         <section class="mt-16 border-t border-base-200 pt-12 dark:border-base-800 lg:mt-24 lg:pt-16">
-          <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+          <div class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-x-4">
             <Text tag="p" variant="textSM" class="uppercase text-base-600 dark:text-base-300">
               {blockLabels[2]}
             </Text>
@@ -319,7 +319,7 @@ const showResult = shouldRenderImage(key("image.result"), images.result);
             index > 0 && "mt-16 border-t border-base-200 dark:border-base-800 lg:mt-24",
           ]}
         >
-          <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start lg:gap-12">
+          <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start lg:gap-x-4 lg:gap-y-12">
             <div class="lg:col-span-3">
               <Text
                 tag="p"
